@@ -3,11 +3,12 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".SkillIQLeadersFragment">
+             tools:context=".SkillIQLeadersFragment"
+             android:id="@+id/skill_iq_fragment">
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/list_learning_leaders"
+            android:layout_height="match_parent" android:id="@+id/list_skill_iq_leaders"
             tools:listitem="@layout/item_learning_leader_list"/>
 
 </FrameLayout>
