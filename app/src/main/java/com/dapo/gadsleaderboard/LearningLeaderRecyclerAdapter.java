@@ -23,19 +23,25 @@ public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
     private Context mContext;
     Fragment mFragment;
 
-    public LearningLeaderRecyclerAdapter(Context context, List<LeaderModel> leaderModelData, Fragment fragment) {
+    public LearningLeaderRecyclerAdapter(Context context, Fragment fragment) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mFragment = fragment;
-        if(leaderModelData != null) {
-            this.leaderModelData = leaderModelData;
-        } else {
-            this.leaderModelData = new ArrayList<>();
-        }
+        leaderModelData = new ArrayList<>();
+//        if(leaderModelData != null) {
+//            this.leaderModelData = leaderModelData;
+//        } else {
+//            this.leaderModelData = new ArrayList<>();
+//        }
 
 
 //        Log.d(TAG, "onResponse: " + DataManager.getInstance().getLearningLeaderBoard().size());
 
+    }
+
+    public void setLeaderModelData(List<LeaderModel> leaderModelData) {
+        this.leaderModelData = leaderModelData;
+        notifyDataSetChanged();
     }
 
     @NonNull

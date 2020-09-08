@@ -50,7 +50,7 @@ public class APIClient {
 //        return client;
 //    }
 
-    public void initializeLeaderBoard() {
+    public void setupLearningHoursLeaderBoard(LearningLeaderRecyclerAdapter recyclerAdapter) {
 
         Log.d(TAG, "initializeLeaderBoard");
 
@@ -64,7 +64,7 @@ public class APIClient {
             public void onResponse(Call<List<LeaderModel>> call, Response<List<LeaderModel>> response) {
                 Log.d(TAG, "Response: here now");
                 Log.d(TAG, "Response: " + response.body());
-                mDataManager.setLearningHoursLeaderBoard(response.body());
+                recyclerAdapter.setLeaderModelData(response.body());
             }
 
             @Override
@@ -73,5 +73,31 @@ public class APIClient {
 
             }
         });
+    }
+
+    public void setupSkillIQLeaderBoard(LearningLeaderRecyclerAdapter recyclerAdapter) {
+
+        Log.d(TAG, "initializeLeaderBoard");
+
+        mRequestInterface = getClient().create(RequestInterface.class);
+
+        Call<List<LeaderModel>> call = mRequestInterface.getSkillIQLeaderBoard();
+
+        Log.d(TAG, "Response = about to enter enqueue");
+        call.enqueue(new Callback<List<LeaderModel>>() {
+            @Override
+            public void onResponse(Call<List<LeaderModel>> call, Response<List<LeaderModel>> response) {
+                Log.d(TAG, "Response of skills: here now");
+                Log.d(TAG, "Response: of skills " + response.body());
+                recyclerAdapter.setLeaderModelData(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<LeaderModel>> call, Throwable t) {
+                Log.d(TAG, "Failed");
+
+            }
+        });
+
     }
 }

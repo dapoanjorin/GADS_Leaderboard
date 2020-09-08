@@ -41,9 +41,9 @@ public class LearningLeadersFragment extends Fragment {
 
         mDm = DataManager.getInstance();
         mApiClient = new APIClient(mDm);
-        mApiClient.initializeLeaderBoard();
         mRecyclerView = view.findViewById(R.id.list_learning_leaders);
         setupRecyclerView();
+        mApiClient.setupLearningHoursLeaderBoard(mRecyclerAdapter);
 
         return view;
 
@@ -53,7 +53,7 @@ public class LearningLeadersFragment extends Fragment {
         List<LeaderModel> leaderModels = mDm.getLearningHoursLeaderBoard();
 
         Log.d(TAG, "onResponse: " + leaderModels.size());
-        mRecyclerAdapter = new LearningLeaderRecyclerAdapter(getActivity(), leaderModels, getActivity().getSupportFragmentManager().getFragments().get(0));
+        mRecyclerAdapter = new LearningLeaderRecyclerAdapter(getActivity(), getActivity().getSupportFragmentManager().getFragments().get(0));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mRecyclerAdapter);
     }

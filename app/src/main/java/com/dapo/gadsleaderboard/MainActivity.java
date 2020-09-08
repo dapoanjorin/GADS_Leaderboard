@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
     public static Context mContext;
+    private DataManager mDm;
+    private APIClient mApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mViewPagerAdapter);
 
         mTabLayout.setupWithViewPager(mViewPager);
+
     }
 }
