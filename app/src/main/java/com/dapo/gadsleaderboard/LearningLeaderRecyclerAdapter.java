@@ -1,20 +1,22 @@
 package com.dapo.gadsleaderboard;
 
-import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
+
+    private static final String TAG = "LearningLeader";
 
     private List<LeaderModel> leaderModelData;
     private LayoutInflater mLayoutInflater;
@@ -25,7 +27,14 @@ public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mFragment = fragment;
-        this.leaderModelData = leaderModelData;
+        if(leaderModelData != null) {
+            this.leaderModelData = leaderModelData;
+        } else {
+            this.leaderModelData = new ArrayList<>();
+        }
+
+
+//        Log.d(TAG, "onResponse: " + DataManager.getInstance().getLearningLeaderBoard().size());
 
     }
 
@@ -65,20 +74,18 @@ public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
             switch (leaderModel.getType()) {
                 case LeaderModel.LEARNING_TYPE:
                     ((LearningTypeViewHolder) holder).mLeaderName.setText(leaderModel.getName());
-                    ((LearningTypeViewHolder) holder).mLeaderStats.setText(leaderModel.getStats() + ", " + leaderModel.getLocation());
+                    ((LearningTypeViewHolder) holder).mLeaderHours.setText(leaderModel.getHours() + " learning hours, " + leaderModel.getCountry());
                     ((LearningTypeViewHolder) holder).mImageView.setImageResource(R.drawable.top_learner);
                     break;
                     case LeaderModel.SKILL_IQ_TYPE:
                         ((SkillIQTypeViewHolder) holder).mLeaderName.setText(leaderModel.getName());
-                        ((SkillIQTypeViewHolder) holder).mLeaderStats.setText(leaderModel.getStats() + ", " + leaderModel.getLocation());;
+                        ((SkillIQTypeViewHolder) holder).mLeaderScore.setText(leaderModel.getHours() + " skill IQ Score, " + leaderModel.getCountry());;
                         ((SkillIQTypeViewHolder) holder).mImageView.setImageResource(R.drawable.skill_iq);
                         break;
             }
         }
 
     }
-
-
 
 
     @Override
@@ -89,13 +96,13 @@ public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
     public class LearningTypeViewHolder extends RecyclerView.ViewHolder {
 
         public final TextView mLeaderName;
-        public final TextView mLeaderStats;
+        public final TextView mLeaderHours;
         public final ImageView mImageView;
 
         public LearningTypeViewHolder(@NonNull View itemView) {
             super(itemView);
             mLeaderName = itemView.findViewById(R.id.text_leader_name);
-            mLeaderStats = itemView.findViewById(R.id.text_leader_stats);
+            mLeaderHours = itemView.findViewById(R.id.text_leader_hours);
             mImageView = itemView.findViewById(R.id.imageView);
         }
     }
@@ -103,13 +110,13 @@ public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
     public class SkillIQTypeViewHolder extends RecyclerView.ViewHolder {
 
         public final TextView mLeaderName;
-        public final TextView mLeaderStats;
+        public final TextView mLeaderScore;
         public final ImageView mImageView;
 
         public SkillIQTypeViewHolder(@NonNull View itemView) {
             super(itemView);
             mLeaderName = itemView.findViewById(R.id.text_leader_name);
-            mLeaderStats = itemView.findViewById(R.id.text_leader_stats);
+            mLeaderScore = itemView.findViewById(R.id.text_leader_score);
             mImageView = itemView.findViewById(R.id.imageView);
         }
     }

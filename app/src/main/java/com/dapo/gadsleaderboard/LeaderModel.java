@@ -1,20 +1,28 @@
 package com.dapo.gadsleaderboard;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LeaderModel {
 
     public static final int LEARNING_TYPE = 0;
     public static final int SKILL_IQ_TYPE = 1;
 
     private int type;
-    private String name;
-    private String stats;
-    private String location;
 
-    public LeaderModel(int type, String name, String stats, String location) {
+    @SerializedName(value = "name")
+    private String name;
+
+    @SerializedName(value = "hours", alternate = "score")
+    private int hours;
+
+    @SerializedName(value ="country")
+    private String country;
+
+    public LeaderModel(int type, String name, int stats, String location) {
         this.type = type;
         this.name = name;
-        this.stats = stats;
-        this.location = location;
+        this.hours = stats;
+        this.country = location;
     }
 
     public String getName() {
@@ -25,20 +33,20 @@ public class LeaderModel {
         this.name = name;
     }
 
-    public String getStats() {
-        return stats;
+    public int getHours() {
+        return hours;
     }
 
-    public void setStats(String stats) {
-        this.stats = stats;
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCountry() {
+        return country;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public int getType() {
@@ -53,8 +61,8 @@ public class LeaderModel {
     public String toString() {
         return "LeaderModel{" +
                 "name='" + name + '\'' +
-                ", stats='" + stats + '\'' +
-                ", location='" + location + '\'' +
+                ", stats='" + hours + '\'' +
+                ", location='" + country + '\'' +
                 ", type=" + type +
                 '}';
     }
