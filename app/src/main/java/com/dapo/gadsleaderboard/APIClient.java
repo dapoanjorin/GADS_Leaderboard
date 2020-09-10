@@ -14,8 +14,9 @@ public class APIClient {
     private static final String TAG = "APIClient";
 
     private static Retrofit mRetrofit;
-    private static RequestInterface mRequestInterface;
-    public static final String BASE_URL = "https://gadsapi.herokuapp.com/";
+    private static APIClientInterface mAPIClientInterface;
+    public static final String LEADERBOARD_BASE_URL = "https://gadsapi.herokuapp.com/";
+    public static final String SUBMISSION_BASE_URL = "https://docs.google.com/forms/d/e/";
 
     private DataManager mDataManager;
 
@@ -23,12 +24,20 @@ public class APIClient {
         this.mDataManager = dm;
     }
 
-    private Retrofit getClient() {
+    private Retrofit getClient(int type) {
         if (mRetrofit == null) {
-            mRetrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+            if(type == 0) {
+                mRetrofit = new Retrofit.Builder()
+                        .baseUrl(LEADERBOARD_BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+            } else if(type == 1) {
+                mRetrofit = new Retrofit.Builder()
+                        .baseUrl(SUBMISSION_BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+            }
+
         }
         return mRetrofit;
     }
@@ -54,9 +63,9 @@ public class APIClient {
 
         Log.d(TAG, "initializeLeaderBoard");
 
-        mRequestInterface = getClient().create(RequestInterface.class);
+        mAPIClientInterface = getClient(0).create(APIClientInterface.class);
 
-        Call<List<LeaderModel>> call = mRequestInterface.getLearningHoursLeaderBoard();
+        Call<List<LeaderModel>> call = mAPIClientInterface.getLearningHoursLeaderBoard();
 
         Log.d(TAG, "Response = about to enter enqueue");
         call.enqueue(new Callback<List<LeaderModel>>() {
@@ -79,9 +88,9 @@ public class APIClient {
 
         Log.d(TAG, "initializeLeaderBoard");
 
-        mRequestInterface = getClient().create(RequestInterface.class);
+        mAPIClientInterface = getClient(0).create(APIClientInterface.class);
 
-        Call<List<LeaderModel>> call = mRequestInterface.getSkillIQLeaderBoard();
+        Call<List<LeaderModel>> call = mAPIClientInterface.getSkillIQLeaderBoard();
 
         Log.d(TAG, "Response = about to enter enqueue");
         call.enqueue(new Callback<List<LeaderModel>>() {
@@ -95,6 +104,25 @@ public class APIClient {
             @Override
             public void onFailure(Call<List<LeaderModel>> call, Throwable t) {
                 Log.d(TAG, "Failed");
+
+            }
+        });
+    }
+
+    public void submitDetails(String emailAddress, String firstName,
+                              String lastName, String linkToProject) {
+
+        mAPIClientInterface = getClient(1).create(APIClientInterface.class);
+
+        Call<Void> call = mAPIClientInterface.submitDetails(emailAddress, firstName, lastName, linkToProject);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });
