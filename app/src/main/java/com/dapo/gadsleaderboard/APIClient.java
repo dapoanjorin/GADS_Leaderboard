@@ -64,7 +64,7 @@ public class APIClient {
             public void onResponse(Call<List<LeaderModel>> call, Response<List<LeaderModel>> response) {
                 Log.d(TAG, "Response: here now");
                 Log.d(TAG, "Response: " + response.body());
-                recyclerAdapter.setLeaderModelData(response.body());
+                recyclerAdapter.setLeaderModelData(response.body(), 0);
             }
 
             @Override
@@ -89,7 +89,7 @@ public class APIClient {
             public void onResponse(Call<List<LeaderModel>> call, Response<List<LeaderModel>> response) {
                 Log.d(TAG, "Response of skills: here now");
                 Log.d(TAG, "Response: of skills " + response.body());
-                recyclerAdapter.setLeaderModelData(response.body());
+                recyclerAdapter.setLeaderModelData(response.body(), 1);
             }
 
             @Override

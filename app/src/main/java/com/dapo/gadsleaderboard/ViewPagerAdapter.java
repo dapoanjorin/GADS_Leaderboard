@@ -1,5 +1,6 @@
 package com.dapo.gadsleaderboard;
 
+import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -7,10 +8,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
+    private Context mContext;
 
-    public ViewPagerAdapter(FragmentManager fm) {
+    public ViewPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
+        this.mContext = context;
     }
+
 
     @Override
     public Fragment getItem(int position) {
@@ -35,9 +39,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
         String title = null;
         if(position == 0) {
-            title = "Learning Leaders";
+            title =  mContext.getString(R.string.learning_leaders);
         } else if(position == 1) {
-            title = "Skill IQ Leaders";
+            title = mContext.getString(R.string.skill_iq_leaders);
         }
         return title;
     }

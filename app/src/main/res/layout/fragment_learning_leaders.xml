@@ -4,7 +4,8 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".LearningLeadersFragment"
-             android:id="@+id/learning_leaders_fragment">
+             android:id="@+id/learning_leaders_fragment"
+             android:background="@color/colorWhite">
 
 
     <androidx.recyclerview.widget.RecyclerView

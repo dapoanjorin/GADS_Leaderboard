@@ -39,8 +39,15 @@ public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
 
     }
 
-    public void setLeaderModelData(List<LeaderModel> leaderModelData) {
+    public void setLeaderModelData(List<LeaderModel> leaderModelData, int viewType) {
         this.leaderModelData = leaderModelData;
+        for(LeaderModel model : this.leaderModelData) {
+            if(viewType == 0) {
+                model.setType(0);
+            } else if(viewType == 1) {
+                model.setType(1);
+            }
+        }
         notifyDataSetChanged();
     }
 
