@@ -1,6 +1,13 @@
 package com.dapo.gadsleaderboard;
 
+import android.app.Activity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -110,7 +117,9 @@ public class APIClient {
     }
 
     public void submitDetails(String emailAddress, String firstName,
-                              String lastName, String linkToProject) {
+                              String lastName, String linkToProject, Activity activity) {
+
+        Log.d("Test", "was here submission");
 
         mAPIClientInterface = getClient(1).create(APIClientInterface.class);
 
@@ -118,14 +127,44 @@ public class APIClient {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-
+                if(response.isSuccessful()) {
+                    Log.d("Test", "was here success");
+                    hideWidgets(activity);
+                    FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+                    SubmissionDialogFragment dialogFragment = SubmissionDialogFragment.newInstance(SubmissionDialogFragment.SUCCESS);
+                    dialogFragment.show(fragmentManager, "");
+                }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("Test", "was here failed");
+                hideWidgets(activity);
+                FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+                SubmissionDialogFragment dialogFragment = SubmissionDialogFragment.newInstance(SubmissionDialogFragment.FAILURE);
+                dialogFragment.show(fragmentManager, "");
 
             }
         });
+
+    }
+
+    public  void hideWidgets(Activity activity) {
+
+        Log.d("Test", "was here views");
+        TextView projectSubmission = activity.findViewById(R.id.project_submission);
+        EditText firstName = activity.findViewById(R.id.first_name);
+        EditText lastName = activity.findViewById(R.id.last_name);
+        EditText emailAddress = activity.findViewById(R.id.email_address);
+        EditText projectLink = activity.findViewById(R.id.link_to_project);
+        Button submitButton = activity.findViewById(R.id.submit_button);
+
+        projectSubmission.setVisibility(View.VISIBLE);
+        firstName.setVisibility(View.VISIBLE);
+        lastName.setVisibility(View.VISIBLE);
+        emailAddress.setVisibility(View.VISIBLE);
+        projectLink.setVisibility(View.VISIBLE);
+        submitButton.setVisibility(View.VISIBLE);
 
     }
 }
