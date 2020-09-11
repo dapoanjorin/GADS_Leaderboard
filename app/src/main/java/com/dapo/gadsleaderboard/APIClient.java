@@ -118,24 +118,20 @@ public class APIClient {
 
     public void submitDetails(String emailAddress, String firstName,
                               String lastName, String linkToProject, Activity activity) {
-
         Log.d("Test", "was here submission");
-
         mAPIClientInterface = getClient(1).create(APIClientInterface.class);
-
         Call<Void> call = mAPIClientInterface.submitDetails(emailAddress, firstName, lastName, linkToProject);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()) {
+
                     Log.d("Test", "was here success");
                     hideWidgets(activity);
                     FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
                     SubmissionDialogFragment dialogFragment = SubmissionDialogFragment.newInstance(SubmissionDialogFragment.SUCCESS);
                     dialogFragment.show(fragmentManager, "");
-                }
-            }
 
+            }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("Test", "was here failed");
@@ -143,7 +139,6 @@ public class APIClient {
                 FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
                 SubmissionDialogFragment dialogFragment = SubmissionDialogFragment.newInstance(SubmissionDialogFragment.FAILURE);
                 dialogFragment.show(fragmentManager, "");
-
             }
         });
 
@@ -159,12 +154,12 @@ public class APIClient {
         EditText projectLink = activity.findViewById(R.id.link_to_project);
         Button submitButton = activity.findViewById(R.id.submit_button);
 
-        projectSubmission.setVisibility(View.VISIBLE);
-        firstName.setVisibility(View.VISIBLE);
-        lastName.setVisibility(View.VISIBLE);
-        emailAddress.setVisibility(View.VISIBLE);
-        projectLink.setVisibility(View.VISIBLE);
-        submitButton.setVisibility(View.VISIBLE);
+            projectSubmission.setVisibility(View.GONE);
+        firstName.setVisibility(View.GONE);
+        lastName.setVisibility(View.GONE);
+        emailAddress.setVisibility(View.GONE);
+        projectLink.setVisibility(View.GONE);
+        submitButton.setVisibility(View.GONE);
 
     }
 }

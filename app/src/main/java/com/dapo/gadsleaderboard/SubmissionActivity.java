@@ -4,6 +4,7 @@ import android.os.Build;
 import android.view.*;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,14 @@ public class SubmissionActivity extends AppCompatActivity {
         EditText lastName = findViewById(R.id.last_name);
         EditText emailAddress = findViewById(R.id.email_address);
         EditText projectLink = findViewById(R.id.link_to_project);
+
+        ImageButton backArrowButton = findViewById(R.id.backArrowButton);
+        backArrowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Button submitButton = findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
