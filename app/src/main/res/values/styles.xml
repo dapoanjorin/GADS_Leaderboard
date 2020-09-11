@@ -31,4 +31,18 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/rounder_corners_white</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:textColor">@color/colorDarkGrey</item>
+        <item name="android:textColorHint">@color/colorDarkGrey</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DialogAlert" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="windowMinWidthMajor">0dp</item>
+        <item name="windowMinWidthMinor">0dp</item>
+    </style>
+
 </resources>
