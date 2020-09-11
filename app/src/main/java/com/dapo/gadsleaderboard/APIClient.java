@@ -65,18 +65,14 @@ public class APIClient {
 
     public void setupLearningHoursLeaderBoard(LearningLeaderRecyclerAdapter recyclerAdapter) {
 
-        Log.d(TAG, "initializeLeaderBoard");
 
         mAPIClientInterface = getClient(0).create(APIClientInterface.class);
 
         Call<List<LeaderModel>> call = mAPIClientInterface.getLearningHoursLeaderBoard();
 
-        Log.d(TAG, "Response = about to enter enqueue");
         call.enqueue(new Callback<List<LeaderModel>>() {
             @Override
             public void onResponse(Call<List<LeaderModel>> call, Response<List<LeaderModel>> response) {
-                Log.d(TAG, "Response: here now");
-                Log.d(TAG, "Response: " + response.body());
                 recyclerAdapter.setLeaderModelData(response.body(), 0);
             }
 
@@ -131,7 +127,6 @@ public class APIClient {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("Test", "was here failed");
                 hideWidgets(activity);
                 FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
                 SubmissionDialogFragment dialogFragment = SubmissionDialogFragment.newInstance(SubmissionDialogFragment.FAILURE);
@@ -143,7 +138,6 @@ public class APIClient {
 
     public void hideWidgets(Activity activity) {
 
-        Log.d("Test", "was here views");
         TextView projectSubmission = activity.findViewById(R.id.project_submission);
         EditText firstName = activity.findViewById(R.id.first_name);
         EditText lastName = activity.findViewById(R.id.last_name);
