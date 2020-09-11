@@ -32,20 +32,17 @@ public class APIClient {
     }
 
     private Retrofit getClient(int type) {
-        if (mRetrofit == null) {
-            if(type == 0) {
+            if (type == 0) {
                 mRetrofit = new Retrofit.Builder()
                         .baseUrl(LEADERBOARD_BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
-            } else if(type == 1) {
+            } else if (type == 1) {
                 mRetrofit = new Retrofit.Builder()
                         .baseUrl(SUBMISSION_BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
             }
-
-        }
         return mRetrofit;
     }
 
@@ -118,20 +115,20 @@ public class APIClient {
 
     public void submitDetails(String emailAddress, String firstName,
                               String lastName, String linkToProject, Activity activity) {
-        Log.d("Test", "was here submission");
+
         mAPIClientInterface = getClient(1).create(APIClientInterface.class);
         Call<Void> call = mAPIClientInterface.submitDetails(emailAddress, firstName, lastName, linkToProject);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 
-                    Log.d("Test", "was here success");
-                    hideWidgets(activity);
-                    FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
-                    SubmissionDialogFragment dialogFragment = SubmissionDialogFragment.newInstance(SubmissionDialogFragment.SUCCESS);
-                    dialogFragment.show(fragmentManager, "");
+                hideWidgets(activity);
+                FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+                SubmissionDialogFragment dialogFragment = SubmissionDialogFragment.newInstance(SubmissionDialogFragment.SUCCESS);
+                dialogFragment.show(fragmentManager, "");
 
             }
+
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("Test", "was here failed");
@@ -144,7 +141,7 @@ public class APIClient {
 
     }
 
-    public  void hideWidgets(Activity activity) {
+    public void hideWidgets(Activity activity) {
 
         Log.d("Test", "was here views");
         TextView projectSubmission = activity.findViewById(R.id.project_submission);
@@ -154,7 +151,7 @@ public class APIClient {
         EditText projectLink = activity.findViewById(R.id.link_to_project);
         Button submitButton = activity.findViewById(R.id.submit_button);
 
-            projectSubmission.setVisibility(View.GONE);
+        projectSubmission.setVisibility(View.GONE);
         firstName.setVisibility(View.GONE);
         lastName.setVisibility(View.GONE);
         emailAddress.setVisibility(View.GONE);
