@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,7 +58,15 @@ public class SubmissionDialogFragment extends androidx.fragment.app.DialogFragme
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         String type = getArguments().getString(TYPE);
         if (type == CONFIRMATION) {
-            return inflater.inflate(R.layout.fragment_confirmation_dialog, container);
+            View view = inflater.inflate(R.layout.fragment_confirmation_dialog, container);
+            ImageView cancelButton = view.findViewById(R.id.cancelButton);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getDialog().dismiss();
+                }
+            });
+            return view;
         } else if (type == SUCCESS) {
             return inflater.inflate(R.layout.fragment_success_dialog, container);
         }
