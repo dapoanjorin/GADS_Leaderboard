@@ -1,20 +1,19 @@
-package com.dapo.gadsleaderboard;
+package com.dapo.gadsleaderboard.network;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import com.dapo.gadsleaderboard.R;
+import com.dapo.gadsleaderboard.ui.fragments.SubmissionDialogFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.util.List;
 
 public class APIClient {
 
@@ -25,13 +24,11 @@ public class APIClient {
     public static final String LEADERBOARD_BASE_URL = "https://gadsapi.herokuapp.com/";
     public static final String SUBMISSION_BASE_URL = "https://docs.google.com/forms/d/e/";
 
-    private DataManager mDataManager;
 
-    public APIClient(DataManager dm) {
-        this.mDataManager = dm;
+    public APIClient() {
     }
 
-    private Retrofit getClient(int type) {
+    public static Retrofit getClient(int type) {
             if (type == 0) {
                 mRetrofit = new Retrofit.Builder()
                         .baseUrl(LEADERBOARD_BASE_URL)
@@ -44,69 +41,6 @@ public class APIClient {
                         .build();
             }
         return mRetrofit;
-    }
-
-    //    private OkHttpClient getHttpClient() {
-//
-//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-//
-//
-//
-//        //TODO : remove logging interceptors as it is to be used for development purpose
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .connectTimeout(300, TimeUnit.SECONDS)
-//                .readTimeout(300,TimeUnit.SECONDS).
-//                        addInterceptor(logging).
-//                        build();
-//
-//        return client;
-//    }
-
-    public void setupLearningHoursLeaderBoard(LearningLeaderRecyclerAdapter recyclerAdapter) {
-
-
-        mAPIClientInterface = getClient(0).create(APIClientInterface.class);
-
-        Call<List<LeaderModel>> call = mAPIClientInterface.getLearningHoursLeaderBoard();
-
-        call.enqueue(new Callback<List<LeaderModel>>() {
-            @Override
-            public void onResponse(Call<List<LeaderModel>> call, Response<List<LeaderModel>> response) {
-                recyclerAdapter.setLeaderModelData(response.body(), 0);
-            }
-
-            @Override
-            public void onFailure(Call<List<LeaderModel>> call, Throwable t) {
-                Log.d(TAG, "Failed");
-
-            }
-        });
-    }
-
-    public void setupSkillIQLeaderBoard(LearningLeaderRecyclerAdapter recyclerAdapter) {
-
-        Log.d(TAG, "initializeLeaderBoard");
-
-        mAPIClientInterface = getClient(0).create(APIClientInterface.class);
-
-        Call<List<LeaderModel>> call = mAPIClientInterface.getSkillIQLeaderBoard();
-
-        Log.d(TAG, "Response = about to enter enqueue");
-        call.enqueue(new Callback<List<LeaderModel>>() {
-            @Override
-            public void onResponse(Call<List<LeaderModel>> call, Response<List<LeaderModel>> response) {
-                Log.d(TAG, "Response of skills: here now");
-                Log.d(TAG, "Response: of skills " + response.body());
-                recyclerAdapter.setLeaderModelData(response.body(), 1);
-            }
-
-            @Override
-            public void onFailure(Call<List<LeaderModel>> call, Throwable t) {
-                Log.d(TAG, "Failed");
-
-            }
-        });
     }
 
     public void submitDetails(String emailAddress, String firstName,

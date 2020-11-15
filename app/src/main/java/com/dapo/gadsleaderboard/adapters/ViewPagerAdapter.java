@@ -1,10 +1,13 @@
-package com.dapo.gadsleaderboard;
+package com.dapo.gadsleaderboard.adapters;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import com.dapo.gadsleaderboard.R;
+import com.dapo.gadsleaderboard.ui.fragments.LearningLeadersFragment;
+import com.dapo.gadsleaderboard.ui.fragments.SkillIQLeadersFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 

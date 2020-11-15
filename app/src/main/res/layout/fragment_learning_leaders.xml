@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".LearningLeadersFragment"
-             android:id="@+id/learning_leaders_fragment"
-             android:background="@color/colorWhite">
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.fragments.LearningLeadersFragment">
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/list_learning_leaders"
-            tools:listitem="@layout/item_learning_leader_list"/>
-</FrameLayout>
+            android:layout_height="match_parent"
+            android:id="@+id/learning_leaders_fragment"
+            android:background="@color/colorWhite">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/list_learning_leaders"
+                tools:listitem="@layout/item_learning_leader_list"/>
+    </FrameLayout>
+
+</layout>

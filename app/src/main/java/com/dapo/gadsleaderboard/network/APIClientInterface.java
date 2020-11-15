@@ -1,5 +1,6 @@
-package com.dapo.gadsleaderboard;
+package com.dapo.gadsleaderboard.network;
 
+import com.dapo.gadsleaderboard.other.LeaderModel;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

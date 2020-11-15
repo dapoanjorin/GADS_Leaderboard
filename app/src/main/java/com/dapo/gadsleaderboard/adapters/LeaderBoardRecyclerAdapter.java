@@ -1,7 +1,6 @@
-package com.dapo.gadsleaderboard;
+package com.dapo.gadsleaderboard.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+import com.dapo.gadsleaderboard.other.LeaderModel;
+import com.dapo.gadsleaderboard.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
+public class LeaderBoardRecyclerAdapter extends RecyclerView.Adapter {
 
     private static final String TAG = "LearningLeader";
 
@@ -23,19 +24,11 @@ public class LearningLeaderRecyclerAdapter extends RecyclerView.Adapter {
     private Context mContext;
     Fragment mFragment;
 
-    public LearningLeaderRecyclerAdapter(Context context, Fragment fragment) {
+    public LeaderBoardRecyclerAdapter(Context context, Fragment fragment) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         mFragment = fragment;
         leaderModelData = new ArrayList<>();
-//        if(leaderModelData != null) {
-//            this.leaderModelData = leaderModelData;
-//        } else {
-//            this.leaderModelData = new ArrayList<>();
-//        }
-
-
-//        Log.d(TAG, "onResponse: " + DataManager.getInstance().getLearningLeaderBoard().size());
 
     }
 

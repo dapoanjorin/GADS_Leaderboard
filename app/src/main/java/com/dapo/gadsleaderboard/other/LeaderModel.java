@@ -1,4 +1,4 @@
-package com.dapo.gadsleaderboard;
+package com.dapo.gadsleaderboard.other;
 
 import com.google.gson.annotations.SerializedName;
 

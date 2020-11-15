@@ -1,32 +1,30 @@
-package com.dapo.gadsleaderboard;
+package com.dapo.gadsleaderboard.ui.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.viewpager.widget.ViewPager;
-import com.google.android.material.tabs.TabLayout;
+import com.dapo.gadsleaderboard.adapters.ViewPagerAdapter;
+import com.dapo.gadsleaderboard.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
-    public static Context mContext;
-    private DataManager mDm;
-    private APIClient mApiClient;
 
-    private Button button;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+        enableStrictMode();
 
         // transparent status bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -34,17 +32,12 @@ public class MainActivity extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        button = findViewById(R.id.submit_button);
-
-        mViewPager = findViewById(R.id.viewPager);
-        mTabLayout = findViewById(R.id.tabLayout);
-
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
-        mViewPager.setAdapter(mViewPagerAdapter);
+        binding.viewPager.setAdapter(mViewPagerAdapter);
 
-        mTabLayout.setupWithViewPager(mViewPager);
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SubmissionActivity.class);
@@ -52,5 +45,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void enableStrictMode() {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build();
+        StrictMode.setThreadPolicy(policy);
     }
 }
