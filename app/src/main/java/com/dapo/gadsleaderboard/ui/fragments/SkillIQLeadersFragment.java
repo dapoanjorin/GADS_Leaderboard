@@ -63,7 +63,12 @@ public class SkillIQLeadersFragment extends Fragment {
         viewModel.databaseList.observe(getViewLifecycleOwner(), new Observer<List<LeaderBoard>>() {
             @Override
             public void onChanged(List<LeaderBoard> leaderBoards) {
-                List<LeaderModel> list = leaderBoards.get(0).getSkillIQLeaderBoard();
+                List<LeaderModel> list = null;
+                for(int i =0; i < leaderBoards.size(); i++) {
+                    if(leaderBoards.get(i).getSkillIQLeaderBoard() != null) {
+                        list = leaderBoards.get(i).getSkillIQLeaderBoard();
+                    }
+                }
                 mRecyclerAdapter.setLeaderModelData(list, 1);
             }
         });
