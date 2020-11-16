@@ -63,7 +63,7 @@ public class LearningLeadersFragment extends Fragment {
 
     private void loadFromDatabase(LeaderBoardViewModel viewModel) {
         viewModel.databaseList.observe(getViewLifecycleOwner(), leaderBoards -> {
-            List<LeaderModel> list = leaderBoards.get(leaderBoards.size() - 1).getLearningLeaderBoard();
+            List<LeaderModel> list = leaderBoards.get(0).getLearningLeaderBoard();
             mRecyclerAdapter.setLeaderModelData(list, 0);
         });
     }
