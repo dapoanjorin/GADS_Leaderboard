@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        enableStrictMode();
-
         // transparent status bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
@@ -47,12 +45,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void enableStrictMode() {
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .build();
-        StrictMode.setThreadPolicy(policy);
-    }
 }

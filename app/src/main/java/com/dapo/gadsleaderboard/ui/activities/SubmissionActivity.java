@@ -19,15 +19,12 @@ public class SubmissionActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        // transparent status bar
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-
         binding.backArrowButton.setOnClickListener(view12 -> finish());
-
         binding.submitButton.setOnClickListener(view1 -> {
             binding.projectSubmission.setVisibility(View.GONE);
             binding.firstName.setVisibility(View.GONE);
